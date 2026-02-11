@@ -1,0 +1,13 @@
+services:
+  ftp:
+    build: .
+    container_name: ftp-server
+    environment:
+      FTP_USER: dynamic
+      FTP_PASS: yield
+    ports:
+      - "21:21"           # FTP command
+      - "21100-21110:21100-21110"  # Passive data range
+    volumes:
+      - ./data:/home/vsftpd/dynamic   # Uploaded files land here
+    restart: unless-stopped
